@@ -7,23 +7,20 @@ const style = {
   mapboxgl.accessToken ="pk.eyJ1IjoicG9wcHlzZWVkNjQ2NCIsImEiOiJja2poZWFhZ2sxMHE5MnVudmJ0ejQyZXRoIn0.QQ5olS8pxE7ECjKddT--eQ";
 //mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
 const Map = () => {
-   
-  
+
     useEffect(() => {
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/drakosi/ckvcwq3rwdw4314o3i2ho8tph',
         center: [-99.29011, 39.39172],
-        zoom: 3,
+        zoom: 2,
       })
   
      
       
     }, [])
   
-    const addToMap = (map, coordinates) => {
-      const marker1 = new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
-    }
+    
   
     return <div className={style.wrapper} id='map' />
   }
