@@ -22,7 +22,7 @@ const style = {
 const basePrice=1542
 
 const RideSelector = () => {
-   const[carList,SetCarList]=useState([]);
+   const[carList,setCarList]=useState([]);
    
   useEffect(() => {
     ;(async () => {
