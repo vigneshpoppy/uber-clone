@@ -25,7 +25,7 @@ const RideSelector = () => {
    const[carList,setCarList]=useState([]);
    
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       try {
         const response = await fetch('/api/db/getRideTypes')
 
