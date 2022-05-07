@@ -27,7 +27,7 @@ const RideSelector = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch('/api/db/getRideTypes')
+        const response = await fetch('/api/DataProvider/getRideTypes')
 
         const data = await response.json()
         console.log(data);
