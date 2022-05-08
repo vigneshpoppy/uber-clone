@@ -1,29 +1,44 @@
 import { useEffect, useContext } from 'react'
 import mapboxgl from 'mapbox-gl'
+import { UberContext } from '../Context/uberContext'
 
 const style = {
-    wrapper: `flex-1 h-full w-full`,
-  };
-  mapboxgl.accessToken ="pk.eyJ1IjoicG9wcHlzZWVkNjQ2NCIsImEiOiJja2poZWFhZ2sxMHE5MnVudmJ0ejQyZXRoIn0.QQ5olS8pxE7ECjKddT--eQ";
-//mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
-const Map = () => {
+  wrapper: `flex-1 h-full w-full`,
+}
 
-    useEffect(() => {
-      const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/drakosi/ckvcwq3rwdw4314o3i2ho8tph',
-        center: [-99.29011, 39.39172],
-        zoom: 2,
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
+
+const Map = () => {
+  const { pickupCoordinates, dropoffCoordinates } = useContext(UberContext)
+
+  useEffect(() => {
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/drakosi/ckvcwq3rwdw4314o3i2ho8tph',
+      center: [-99.29011, 39.39172],
+      zoom: 3,
+    })
+
+    if (pickupCoordinates) {
+      addToMap(map, pickupCoordinates)
+    }
+
+    if (dropoffCoordinates) {
+      addToMap(map, dropoffCoordinates)
+    }
+
+    if (pickupCoordinates && dropoffCoordinates) {
+      map.fitBounds([dropoffCoordinates, pickupCoordinates], {
+        padding: 400,
       })
-  
-     
-      
-    }, [])
-  
-    
-  
-    return <div className={style.wrapper} id='map' />
+    }
+  }, [pickupCoordinates, dropoffCoordinates])
+
+  const addToMap = (map, coordinates) => {
+    const marker1 = new mapboxgl.Marker().setLngLat(coordinates).addTo(map)
   }
-  
-  export default Map
-  
+
+  return <div className={style.wrapper} id='map' />
+}
+
+export default Map
